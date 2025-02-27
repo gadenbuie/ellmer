@@ -188,12 +188,28 @@ ContentToolRequest <- new_class(
   )
 )
 method(format, ContentToolRequest) <- function(x, ...) {
+  name <- tool_fn_namespace(x@name)
   if (length(x@arguments) == 0) {
-    call <- call2(x@name)
+    call <- call2(name$.fn, .ns = name$.ns)
   } else {
-    call <- call2(x@name, !!!x@arguments)
+    call <- call2(name$.fn, !!!x@arguments, .ns = name$.ns)
   }
   cli::format_inline("[{.strong tool request} ({x@id})]: {format(call)}")
+}
+
+tool_fn_namespace <- function(tool_name) {
+  tryCatch(
+    {
+      call_expr <- parse_expr(paste0(tool_name, "()"))
+      list(
+        .fn = call_name(call_expr),
+        .ns = call_ns(call_expr)
+      )
+    },
+    error = function(...) {
+      list(.fn = tool_name)
+    }
+  )
 }
 
 #' @rdname Content
