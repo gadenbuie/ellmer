@@ -219,13 +219,22 @@ turns (if any exists).</p></dd>
 
 </div><p></p><hr><a id="method-Chat-tokens"></a><div class="section">
 <h3 id="method-tokens-">Method <code>tokens()</code><a class="anchor" aria-label="anchor" href="#method-tokens-"></a></h3>
-<p>List the number of tokens consumed by each assistant turn.
-Currently tokens are recorded for assistant turns only; so user
-turns will have zeros.</p><div class="section">
+<p>A data frame with a <code>tokens</code> column that proides the
+number of input tokens used by user turns and the number of
+output tokens used by assistant turns.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">tokens</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">tokens</span><span class="op">(</span>include_system_prompt <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+<div class="section">
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>include_system_prompt</code></dt>
+<dd><p>Whether to include the system prompt in
+the turns (if any exists).</p></dd>
+
+
+</dl><p></p></div>
+</div>
 
 </div><p></p><hr><a id="method-Chat-last_turn"></a><div class="section">
 <h3 id="method-last-turn-">Method <code>last_turn()</code><a class="anchor" aria-label="anchor" href="#method-last-turn-"></a></h3>
@@ -235,7 +244,7 @@ turns will have zeros.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>role</code></dt>
 <dd><p>Optionally, specify a role to find the last turn with
 for the role.</p></dd>
@@ -258,7 +267,7 @@ simple string (probably Markdown).</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images
 (see <code><a href="content_image_url.html">content_image_file()</a></code> and <code><a href="content_image_url.html">content_image_url()</a></code>.</p></dd>
@@ -275,14 +284,15 @@ will be used.</p></dd>
 
 </div><p></p><hr><a id="method-Chat-chat_parallel"></a><div class="section">
 <h3 id="method-chat-parallel-">Method <code>chat_parallel()</code><a class="anchor" aria-label="anchor" href="#method-chat-parallel-"></a></h3>
-<p>Submit multiple prompts in parallel. Returns a list of
-Chat objects, one for each prompt.</p><div class="section">
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>Submit multiple prompts in parallel. Returns a list of Chat objects,
+one for each prompt.</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">chat_parallel</span><span class="op">(</span><span class="va">prompts</span>, max_active <span class="op">=</span> <span class="fl">10</span>, rpm <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>prompts</code></dt>
 <dd><p>A list of user prompts.</p></dd>
 
@@ -306,7 +316,7 @@ Chat objects, one for each prompt.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Will typically include
 the phrase "extract structured data".</p></dd>
@@ -334,6 +344,7 @@ data frames and arrays of strings into a character vector.</p></dd>
 
 </div><p></p><hr><a id="method-Chat-extract_data_parallel"></a><div class="section">
 <h3 id="method-extract-data-parallel-">Method <code>extract_data_parallel()</code><a class="anchor" aria-label="anchor" href="#method-extract-data-parallel-"></a></h3>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
 <p>Submit multiple prompts in parallel. Returns a list of
 extracted data, one for each prompt.</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
@@ -347,7 +358,7 @@ extracted data, one for each prompt.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>prompts</code></dt>
 <dd><p>A list of user prompts.</p></dd>
 
@@ -383,7 +394,7 @@ that resolves to an object matching the type specification.</p><div class="secti
 </div>
 
 <div class="section">
-<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Will typically include
 the phrase "extract structured data".</p></dd>
@@ -413,7 +424,7 @@ to a string (probably Markdown).</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
+<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images.</p></dd>
 
@@ -432,7 +443,7 @@ waiting for more content from the chatbot.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images.</p></dd>
 
@@ -450,7 +461,7 @@ yields string promises.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images.</p></dd>
 
@@ -473,7 +484,7 @@ alone until the entire request is JSON-serialized.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tool_def</code></dt>
 <dd><p>Tool definition created by <code><a href="tool.html">tool()</a></code>.</p></dd>
 
@@ -489,7 +500,7 @@ alone until the entire request is JSON-serialized.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

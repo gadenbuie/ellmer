@@ -176,12 +176,11 @@ a tool:</p>
 <p>This is a fair amount of code to write, even for such a simple
 function as <code>get_current_time</code>. Fortunately, you don’t have
 to write this by hand! I generated the above <code>register_tool</code>
-call by calling <code>create_tool_metadata(get_current_time)</code>,
-which printed that code at the console.
-<code>create_tool_metadata()</code> works by passing the function’s
-signature and documentation to GPT-4o, and asking it to generate the
-<code>register_tool</code> call for you.</p>
-<p>Note that <code>create_tool_metadata()</code> may not create perfect
+call by calling <code>create_tool_def(get_current_time)</code>, which
+printed that code at the console. <code><a href="../reference/create_tool_def.html">create_tool_def()</a></code> works
+by passing the function’s signature and documentation to GPT-4o, and
+asking it to generate the <code>register_tool</code> call for you.</p>
+<p>Note that <code><a href="../reference/create_tool_def.html">create_tool_def()</a></code> may not create perfect
 results, so you must review the generated code before using it. But it
 is a huge time-saver nonetheless, and removes the tedious boilerplate
 generation you’d have to do otherwise.</p>
