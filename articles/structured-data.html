@@ -125,17 +125,16 @@ extracts two specific values from a string:</p>
 calling, as discussed in <code>vignette("function-calling")</code>). The
 type functions can be divided into three main groups:</p>
 <ul>
-<li><p><strong>Scalars</strong> represent single values, of which there
-are five types: <code><a href="../reference/type_boolean.html">type_boolean()</a></code>,
-<code><a href="../reference/type_boolean.html">type_integer()</a></code>, <code><a href="../reference/type_boolean.html">type_number()</a></code>,
-<code><a href="../reference/type_boolean.html">type_string()</a></code>, and <code><a href="../reference/type_boolean.html">type_enum()</a></code>, representing a
-single logical, integer, double, string, and factor value
-respectively.</p></li>
+<li><p><strong>Scalars</strong> represent five types of single values,
+<code><a href="../reference/type_boolean.html">type_boolean()</a></code>, <code><a href="../reference/type_boolean.html">type_integer()</a></code>,
+<code><a href="../reference/type_boolean.html">type_number()</a></code>, <code><a href="../reference/type_boolean.html">type_string()</a></code>, and
+<code><a href="../reference/type_boolean.html">type_enum()</a></code>, which represent a single logical, integer,
+double, string, and factor value respectively.</p></li>
 <li>
 <p><strong>Arrays</strong> represent any number of values of the
-same type and are created with <code><a href="../reference/type_boolean.html">type_array()</a></code>. You must
-always supply the <code>item</code> argument which specifies the type of
-each individual element. Arrays of scalars are very similar to R’s
+same type. They are created with <code><a href="../reference/type_boolean.html">type_array()</a></code>. You must
+always supply the <code>item</code> argument which specifies the type
+for each individual element. Arrays of scalars are very similar to R’s
 atomic vectors:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_logical_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span>items <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_boolean</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -148,10 +147,10 @@ closely resemble lists with well defined structures:</p>
 <code class="sourceCode R"><span><span class="va">list_of_integers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span>items <span class="op">=</span> <span class="va">type_integer_vector</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Objects</strong> represent a collection of named values
-and are created with <code><a href="../reference/type_boolean.html">type_object()</a></code>. Objects can contain any
-number of scalars, arrays, and other objects. They are similar to named
-lists in R.</p>
+<p><strong>Objects</strong> represent a collection of named values.
+They are created with <code><a href="../reference/type_boolean.html">type_object()</a></code>. Objects can contain
+any number of scalars, arrays, and other objects. They are similar to
+named lists in R.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_person</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_object</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_string</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -161,20 +160,19 @@ lists in R.</p>
 </li>
 </ul>
 <p>Using these type specifications ensures that the LLM will return
-JSON. But ellmer goes one step further to convert the results to their
-most natural R representation. This currently converts arrays of
-boolean, integers, numbers, and strings into logical, integer, numeric,
-and character vectors, and arrays of objects into data frames. You can
-opt-out of this and get plain lists instead by setting
+JSON. But ellmer goes one step further to convert the results to the
+closest R analog. Currently, this converts arrays of boolean, integers,
+numbers, and strings into logical, integer, numeric, and character
+vectors. Arrays of objects are converted into data frames. You can
+opt-out of this and get plain lists by setting
 <code>convert = FALSE</code> in <code>$extract_data()</code>.</p>
-<p>As well as the definition of the types, you need to provide the LLM
-with some information about what you actually want. This is the purpose
-of the first argument, <code>description</code>, which is a string that
+<p>In addition to defining types, you need to provide the LLM with some
+information about what you actually want. This is the purpose of the
+first argument, <code>description</code>, which is a string that
 describes the data that you want. This is a good place to ask nicely for
-other attributes you’ll like the value to possess (e.g. minimum or
-maximum values, date formats, …). You aren’t guaranteed that these
-requests will be honoured, but the LLM will usually make a best effort
-to do so.</p>
+other attributes you’ll like the value to have (e.g. minimum or maximum
+values, date formats, …). There’s no guarantee that these requests will
+be honoured, but the LLM will usually make a best effort to do so.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_type_person</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_object</a></span><span class="op">(</span></span>
 <span>  <span class="st">"A person"</span>,</span>
@@ -186,14 +184,14 @@ to do so.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we’ll dive into some examples before coming back to talk more
-data types details.</p>
+about the details of data types.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>The following examples are <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/tool_use/extracting_structured_json.ipynb" class="external-link">closely
-inspired by the Claude documentation</a> and hint at some of the ways
-you can use structured data extraction.</p>
+<p>The following examples, which are <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/tool_use/extracting_structured_json.ipynb" class="external-link">closely
+inspired by the Claude documentation</a>, hint at some of the ways you
+can use structured data extraction.</p>
 <div class="section level3">
 <h3 id="example-1-article-summarisation">Example 1: Article summarisation<a class="anchor" aria-label="anchor" href="#example-1-article-summarisation"></a>
 </h3>
@@ -258,8 +256,8 @@ you can use structured data extraction.</p>
 <span></span>
 <span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_openai.html">chat_openai</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">chat</span><span class="op">$</span><span class="fu">extract_data</span><span class="op">(</span><span class="va">text</span>, type <span class="op">=</span> <span class="va">type_sentiment</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Note that we’ve asked nicely for the scores to sum 1, and they do in
-this example (at least when I ran the code), but it’s not
+<p>Note that while we’ve asked nicely for the scores to sum 1, which
+they do in this example (at least when I ran the code), this is not
 guaranteed.</p>
 </div>
 <div class="section level3">
@@ -311,18 +309,18 @@ guaranteed.</p>
 <span></span>
 <span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">chat</span><span class="op">$</span><span class="fu">extract_data</span><span class="op">(</span><span class="va">prompt</span>, type <span class="op">=</span> <span class="va">type_characteristics</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>This examples only works with Claude, not GPT or Gemini, because only
-Claude supports adding arbitrary additional properties.</p>
+<p>This example only works with Claude, not GPT or Gemini, because only
+Claude supports adding additional, arbitrary properties.</p>
 </div>
 <div class="section level3">
 <h3 id="example-6-extracting-data-from-an-image">Example 6: Extracting data from an image<a class="anchor" aria-label="anchor" href="#example-6-extracting-data-from-an-image"></a>
 </h3>
-<p>This example comes from <a href="https://gist.github.com/dannguyen/faaa56cebf30ad51108a9fe4f8db36d8" class="external-link">Dan
-Nguyen</a> and you can see other interesting applications at that link.
+<p>The final example comes from <a href="https://gist.github.com/dannguyen/faaa56cebf30ad51108a9fe4f8db36d8" class="external-link">Dan
+Nguyen</a> (you can see other interesting applications at that link).
 The goal is to extract structured data from this screenshot:</p>
 <div class="float">
-<img src="congressional-assets.png" alt="A screenshot of schedule A: a table showing assets and “unearned” income"><div class="figcaption">A screenshot of schedule A: a table showing
-assets and “unearned” income</div>
+<img src="congressional-assets.png" alt="Screenshot of schedule A: a table showing assets and “unearned” income"><div class="figcaption">Screenshot of schedule A: a table showing assets
+and “unearned” income</div>
 </div>
 <p>Even without any descriptions, ChatGPT does pretty well:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -382,10 +380,10 @@ one in the text:</p>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">extract_data</span><span class="op">(</span><span class="va">prompt</span>, type <span class="op">=</span> <span class="va">type_article</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p>Note that I’ve used more of an explict prompt here. For this example,
-I found that this generated better results, and it’s a useful place to
-put additional instructions.</p>
-<p>If let the LLM know that the fields are all optional, it’ll instead
-return <code>NULL</code> for the missing fields:</p>
+I found that this generated better results and that it’s a useful place
+to put additional instructions.</p>
+<p>If I let the LLM know that the fields are all optional, it’ll return
+<code>NULL</code> for the missing fields:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_article</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_object</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Information about an article written in markdown"</span>,</span>
@@ -399,8 +397,8 @@ return <code>NULL</code> for the missing fields:</p>
 <h3 id="data-frames">Data frames<a class="anchor" aria-label="anchor" href="#data-frames"></a>
 </h3>
 <p>If you want to define a data frame like object, you might be tempted
-to create a definition similar to what R uses: an object (i.e. a named
-list) containing multiple vectors (i.e. arrays):</p>
+to create a definition similar to what R uses: an object (i.e., a named
+list) containing multiple vectors (i.e., an array):</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_my_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_object</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span>items <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_string</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -408,10 +406,9 @@ list) containing multiple vectors (i.e. arrays):</p>
 <span>  height <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span>items <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  weight <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span>items <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>This however, is not quite right becuase there’s no way to specify
-that each array should have the same length. Instead you need to turn
-the data structure “inside out”, and instead create an array of
-objects:</p>
+<p>This, however, is not quite right becuase there’s no way to specify
+that each array should have the same length. Instead, you’ll need to
+turn the data structure “inside out” and create an array of objects:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type_my_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/type_boolean.html">type_array</a></span><span class="op">(</span></span>
 <span>  items <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_object</a></span><span class="op">(</span></span>
@@ -421,10 +418,10 @@ objects:</p>
 <span>    weight <span class="op">=</span> <span class="fu"><a href="../reference/type_boolean.html">type_number</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If you’re familiar with the terms between row-oriented and
-column-oriented data frames, this is the same idea. Since most language
-don’t possess vectorisation like R, row-oriented structures tend to be
-much more common in the wild.</p>
+<p>If you’re familiar with the terms row-oriented and column-oriented
+data frames, this is the same idea. Since most languages don’t possess
+vectorisation like R, row-oriented structures tend to be much more
+common in the wild.</p>
 </div>
 </div>
 <div class="section level2">
