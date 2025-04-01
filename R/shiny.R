@@ -68,33 +68,95 @@ live_console <- function(chat, quiet = FALSE) {
   invisible(chat)
 }
 
-#' @export
-#' @rdname live_console
-live_browser <- function(chat, quiet = FALSE) {
-  check_installed(c("bslib", "shiny", "shinychat"))
+method(contents_shinychat, new_S3_class(c("Chat", "R6"))) <- function(
+  content,
+  ...
+) {
+  local_options(shinychat.hide_tool_request = TRUE)
 
-  messages <- map(chat$get_turns(), function(turn) {
-    content <- contents_markdown(turn)
+  # Consolidate tool calls into assistant turns. This currently assumes that
+  # tool calls are always returned in user turns that have at least one
+  # proceeding assistant turn.
+  turns <- map(content$get_turns(), function(turn) {
+    if (all(map_lgl(turn@contents, S7_inherits, ContentToolResult))) {
+      turn@role <- "assistant"
+    }
+    turn
+  })
+  turns <- reduce(turns, .init = list(), function(turns, turn) {
+    if (length(turns) == 0) {
+      return(list(turn))
+    }
+
+    # consolidate turns with adjacent roles
+    last_turn <- turns[[length(turns)]]
+    if (identical(last_turn@role, turn@role)) {
+      turns[[length(turns)]]@contents <- c(last_turn@contents, turn@contents)
+      return(turns)
+    }
+
+    c(turns, list(turn))
+  })
+
+  messages <- map(turns, function(turn) {
+    content <- compact(contents_shinychat(turn))
     if (is.null(content) || identical(content, "")) {
       return(NULL)
     }
     list(role = turn@role, content = content)
   })
-  messages <- compact(messages)
+
+  compact(messages)
+}
+
+#' @export
+#' @rdname live_console
+live_browser <- function(chat, quiet = FALSE) {
+  check_installed(c("bslib", "shiny", "shinychat"))
+
+  withr::local_options(list(
+    ellmer.on_tool_result = function(content) {
+      session <- shiny::getDefaultReactiveDomain()
+      session$sendCustomMessage("shinychat-hide-tool-request", content@id)
+    }
+  ))
 
   ui <- bslib::page_fillable(
-    shinychat::chat_ui("chat", height = "100%", messages = messages),
+    shinychat::chat_ui(
+      "chat",
+      height = "100%",
+      messages = contents_shinychat(chat)
+    ),
     shiny::actionButton(
       "close_btn",
       label = "",
       class = "btn-close",
       style = "position: fixed; top: 6px; right: 6px;"
-    )
+    ),
+    shiny::includeCSS(system.file(
+      "shinychat",
+      "tool-request.css",
+      package = "ellmer"
+    )),
+    shiny::includeScript(system.file(
+      "shinychat",
+      "tool-request.js",
+      package = "ellmer"
+    ))
   )
+
   server <- function(input, output, session) {
+    append_stream_task <- shiny::ExtendedTask$new(function(
+      client,
+      ui_id,
+      user_input
+    ) {
+      stream <- client$stream_async(user_input)
+      shinychat::chat_append(ui_id, stream)
+    })
+
     shiny::observeEvent(input$chat_user_input, {
-      stream <- chat$stream_async(input$chat_user_input)
-      shinychat::chat_append("chat", stream)
+      append_stream_task$invoke(chat, "chat", input$chat_user_input)
     })
 
     shiny::observeEvent(input$close_btn, {

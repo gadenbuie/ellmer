@@ -1,3 +1,4 @@
+#' @include tools-def.R
 #' @include utils-S7.R
 NULL
 
@@ -48,6 +49,9 @@ contents_html <- new_generic("contents_html", "content")
 #' @export
 contents_markdown <- new_generic("contents_markdown", "content")
 
+#' @rdname contents_text
+#' @export
+contents_shinychat <- new_generic("contents_shinychat", "content")
 
 #' Content types received from and sent to a chatbot
 #'
@@ -91,6 +95,12 @@ method(contents_markdown, Content) <- function(content) {
 
 method(contents_html, Content) <- function(content) {
   NULL
+}
+
+method(contents_shinychat, Content) <- function(content) {
+  # Fall back to html or markdown
+  html <- contents_html(content)
+  if (!is.null(html)) html else contents_markdown(content)
 }
 
 #' @rdname Content
@@ -175,7 +185,8 @@ method(contents_markdown, ContentImageInline) <- function(content) {
 
 #' @rdname Content
 #' @export
-#' @param id Tool call id (used to associate a request and a result)
+#' @param id Tool call id (used to associate a request and a result),
+#'   automatically added by \pkg{ellmer} when the tool is invoked.
 #' @param name Function name
 #' @param arguments Named list of arguments to call the function with.
 ContentToolRequest <- new_class(
@@ -196,18 +207,41 @@ method(format, ContentToolRequest) <- function(x, ...) {
   cli::format_inline("[{.strong tool request} ({x@id})]: {format(call)}")
 }
 
+method(contents_shinychat, ContentToolRequest) <- function(content, ...) {
+  if (isTRUE(getOption("shinychat.hide_tool_request"))) return(NULL)
+
+  if (length(content@arguments) == 0) {
+    call <- call2(content@name)
+  } else {
+    call <- call2(content@name, !!!content@arguments)
+  }
+
+  shiny::HTML(sprintf(
+    '\n\n<p class="shiny-tool-request" data-tool-call-id="%s">Running <code>%s</code></p>\n\n',
+    content@id,
+    format(call)
+  ))
+}
+
 #' @rdname Content
 #' @export
 #' @param value,error Either the results of calling the function if
 #'   it succeeded, otherwise the error message, as a string. One of
 #'   `value` and `error` will always be `NULL`.
+#' @param call_tool The [tool()] definition of the called tool, automatically
+#'   filled in by \pkg{ellmer} when the tool is invoked.
+#' @param call_args The arguments used when the tool was called, automatically
+#'   filled in by \pkg{ellmer} when the tool is invoked.
 ContentToolResult <- new_class(
   "ContentToolResult",
   parent = Content,
   properties = list(
-    id = prop_string(),
     value = class_any,
-    error = prop_string(allow_null = TRUE)
+    detail = class_list,
+    id = prop_string(allow_null = TRUE),
+    error = prop_string(allow_null = TRUE),
+    call_tool = NULL | ToolDef,
+    call_args = class_list
   )
 )
 method(format, ContentToolResult) <- function(x, ...) {
@@ -217,6 +251,55 @@ method(format, ContentToolResult) <- function(x, ...) {
     value <- x@value
   }
   cli::format_inline("[{.strong tool result}  ({x@id})]: {value}")
+}
+
+method(contents_shinychat, ContentToolResult) <- function(
+  content,
+  ...
+) {
+  pre_code <- function(x) {
+    sprintf("<pre><code>%s</code></pre>", paste(x, collapse = "\n"))
+  }
+
+  if (tool_errored(content)) {
+    tool_args <- pre_code(
+      jsonlite::toJSON(content@call_args, auto_unbox = TRUE)
+    )
+    err <- sprintf(
+      '<details class="shiny-tool-result failed" id="%s"><summary>Failed to call <span class="function-name">%s</span></summary>%s\n\nError:\n\n%s\n\n</details>',
+      content@id,
+      if (!is.null(content@call_tool)) content@call_tool@name else
+        "unknown tool",
+      tool_args,
+      pre_code(content@error)
+    )
+    return(shiny::HTML(paste0("\n\n", err, "\n\n")))
+  }
+
+  result <- paste(content@value, collapse = "\n")
+
+  if (!grepl("```", result)) {
+    result <- pre_code(result)
+  }
+  result <- paste0("<strong>Tool Result</strong>\n", result)
+
+  if (length(content@call_args) == 0) {
+    call <- call2(content@call_tool@name)
+  } else {
+    call <- call2(content@call_tool@name, !!!content@call_args)
+  }
+
+  tool_call <- paste0("<strong>Tool Call</strong>", pre_code(format(call)))
+
+  x <- sprintf(
+    '<details class="shiny-tool-result" id="%s"><summary>View result from <span class="function-name">%s</span></summary>%s\n\n%s\n\n</details>',
+    content@id,
+    content@call_tool@name,
+    tool_call,
+    result
+  )
+
+  shiny::HTML(paste0("\n\n", x, "\n\n"))
 }
 
 tool_errored <- function(x) !is.null(x@error)

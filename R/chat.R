@@ -456,6 +456,10 @@ Chat <- R6::R6Class(
           yield(chunk)
         }
         user_turn <- private$invoke_tools()
+        if (!is.null(user_turn)) {
+          yield(user_turn)
+          yield("\n\n")
+        }
       }
     }),
 
@@ -477,6 +481,10 @@ Chat <- R6::R6Class(
           yield(chunk)
         }
         user_turn <- await(private$invoke_tools_async())
+        if (!is.null(user_turn)) {
+          yield(user_turn)
+          yield("\n\n")
+        }
         if (echo == "all") {
           cat(format(user_turn))
         }
@@ -549,6 +557,15 @@ Chat <- R6::R6Class(
           cat_line(format(turn), prefix = "< ")
         }
       }
+
+      # TODO: When `include_tools` or similar arg is TRUE
+      for (content in turn@contents) {
+        if (!S7_inherits(content, ContentText)) {
+          yield(content)
+          yield("\n\n")
+        }
+      }
+
       self$add_turn(user_turn, turn)
 
       coro::exhausted()
@@ -604,6 +621,15 @@ Chat <- R6::R6Class(
           yield(text)
         }
       }
+
+      # TODO: When `include_tools` or similar arg is TRUE
+      for (content in turn@contents) {
+        if (!S7_inherits(content, ContentText)) {
+          yield(content)
+          yield("\n\n")
+        }
+      }
+
       self$add_turn(user_turn, turn)
       coro::exhausted()
     }),

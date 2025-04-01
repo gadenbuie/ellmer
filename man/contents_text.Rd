@@ -4,6 +4,7 @@
 \alias{contents_text}
 \alias{contents_html}
 \alias{contents_markdown}
+\alias{contents_shinychat}
 \title{Format contents into a textual representation}
 \usage{
 contents_text(content, ...)
@@ -11,6 +12,8 @@ contents_text(content, ...)
 contents_html(content, ...)
 
 contents_markdown(content, ...)
+
+contents_shinychat(content, ...)
 }
 \arguments{
 \item{content}{The \link{Turn} or \link{Content} object to be converted into text.

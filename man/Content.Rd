@@ -27,7 +27,14 @@ ContentToolRequest(
   arguments = list()
 )
 
-ContentToolResult(id = stop("Required"), value = NULL, error = NULL)
+ContentToolResult(
+  value = NULL,
+  detail = list(),
+  id = NULL,
+  error = NULL,
+  call_tool = NULL,
+  call_args = list()
+)
 
 ContentPDF(type = stop("Required"), data = stop("Required"))
 }
@@ -42,7 +49,8 @@ ContentPDF(type = stop("Required"), data = stop("Required"))
 
 \item{data}{Base64 encoded image data.}
 
-\item{id}{Tool call id (used to associate a request and a result)}
+\item{id}{Tool call id (used to associate a request and a result),
+automatically added by \pkg{ellmer} when the tool is invoked.}
 
 \item{name}{Function name}
 
@@ -51,6 +59,12 @@ ContentPDF(type = stop("Required"), data = stop("Required"))
 \item{value, error}{Either the results of calling the function if
 it succeeded, otherwise the error message, as a string. One of
 \code{value} and \code{error} will always be \code{NULL}.}
+
+\item{call_tool}{The \code{\link[=tool]{tool()}} definition of the called tool, automatically
+filled in by \pkg{ellmer} when the tool is invoked.}
+
+\item{call_args}{The arguments used when the tool was called, automatically
+filled in by \pkg{ellmer} when the tool is invoked.}
 }
 \value{
 S7 objects that all inherit from \code{Content}

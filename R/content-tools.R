@@ -3,11 +3,19 @@ invoke_tools <- function(turn, tools) {
   if (length(tools) == 0) {
     return()
   }
+
+  on_tool_request <- getOption("ellmer.on_tool_request", function(...) { }) # fmt: skip
+  if (!is.function(on_tool_request)) {
+    # TODO: Use callback registration to avoid erroring this late
+    abort("`ellmer.on_tool_request` must be a function")
+  }
+
   tool_requests <- extract_tool_requests(turn@contents)
 
   lapply(tool_requests, function(call) {
-    fun <- tools[[call@name]]@fun
-    result <- invoke_tool(fun, call@arguments, call@id)
+    on_tool_request(call)
+
+    result <- invoke_tool(tools[[call@name]], call@arguments, call@id)
 
     if (promises::is.promise(result@value)) {
       cli::cli_abort(c(
@@ -26,13 +34,19 @@ on_load(
       return()
     }
 
+    on_tool_request <- getOption("ellmer.on_tool_request", function(...) { }) # fmt: skip
+    if (!is.function(on_tool_request)) {
+      # TODO: Use callback registration to avoid erroring this late
+      abort("`ellmer.on_tool_request` must be a function")
+    }
+
     tool_requests <- extract_tool_requests(turn@contents)
 
     # We call it this way instead of a more natural for + await_each() because
     # we want to run all the async tool calls in parallel
     result_promises <- lapply(tool_requests, function(call) {
-      fun <- tools[[call@name]]@fun
-      invoke_tool_async(fun, call@arguments, call@id)
+      on_tool_request(call)
+      invoke_tool_async(tools[[call@name]], call@arguments, call@id)
     })
 
     promises::promise_all(.list = result_promises)
@@ -44,35 +58,75 @@ extract_tool_requests <- function(contents) {
   contents[is_tool_request]
 }
 
+tool_result_factory <- function(tool, arguments, id) {
+  function(result = NULL) {
+    if (S7_inherits(result, ContentToolResult)) {
+      result@id <- id
+      result@call_tool <- tool
+      result@call_args <- arguments
+    } else if (is_condition(result)) {
+      result <- ContentToolResult(
+        id = id,
+        error = conditionMessage(result),
+        call_tool = tool,
+        call_args = arguments
+      )
+    } else {
+      result <- ContentToolResult(
+        id = id,
+        value = result,
+        call_tool = tool,
+        call_args = arguments
+      )
+    }
+
+    on_tool_result <- getOption("ellmer.on_tool_result", function(...) { }) # fmt: skip
+    if (!is.function(on_tool_result)) {
+      # TODO: Use callback registration to avoid erroring this late
+      abort("`ellmer.on_tool_result` must be a function")
+    }
+    on_tool_result(result)
+    result
+  }
+}
+
 # Also need to handle edge caess: https://platform.openai.com/docs/guides/function-calling/edge-cases
-invoke_tool <- function(fun, arguments, id) {
-  if (is.null(fun)) {
-    return(ContentToolResult(id = id, error = "Unknown tool"))
+invoke_tool <- function(tool, arguments, id) {
+  tool_result <- tool_result_factory(tool, arguments, id)
+
+  if (is.null(tool) || is.null(tool@fun)) {
+    return(tool_result(cnd("error", message = "Unknown tool")))
   }
 
+  fun <- tool@fun
+
   tryCatch(
-    ContentToolResult(id, do.call(fun, arguments)),
+    tool_result(do.call(fun, arguments)),
     error = function(e) {
       # TODO: We need to report this somehow; it's way too hidden from the user
-      ContentToolResult(id, error = conditionMessage(e))
+      tool_result(e)
     }
   )
 }
 
 on_load(
-  invoke_tool_async <- coro::async(function(fun, arguments, id) {
-    if (is.null(fun)) {
-      return(ContentToolResult(id = id, error = "Unknown tool"))
+  invoke_tool_async <- coro::async(function(tool, arguments, id) {
+    tool_result <- tool_result_factory(tool, arguments, id)
+
+    if (is.null(tool) || is.null(tool@fun)) {
+      return(tool_result(cnd("error", message = "Unknown tool")))
     }
+
+    fun <- tool@fun
 
     tryCatch(
       {
         result <- await(do.call(fun, arguments))
-        ContentToolResult(id, result)
+        tool_result(result)
       },
       error = function(e) {
         # TODO: We need to report this somehow; it's way too hidden from the user
-        ContentToolResult(id, error = conditionMessage(e))
+        tool_result(e)
       }
     )
   })

@@ -1,3 +1,4 @@
+#' @include content.R
 #' @include utils-S7.R
 #' @include types.R
 NULL
