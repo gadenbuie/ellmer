@@ -85,9 +85,6 @@ method(contents_html, Turn) <- function(content) {
 method(contents_markdown, Turn) <- function(content) {
   paste0(unlist(lapply(content@contents, contents_markdown)), collapse = "\n\n")
 }
-method(contents_shinychat, Turn) <- function(content) {
-  lapply(content@contents, contents_shinychat)
-}
 
 user_turn <- function(..., .call = caller_env()) {
   as_user_turn(list2(...), call = .call, arg = "...")
