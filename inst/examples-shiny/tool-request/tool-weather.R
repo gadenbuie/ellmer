@@ -2,9 +2,18 @@
 
 # The `get_current_weather` tool is going to return a custom `ContentToolResult`
 # object with it's own custom display via `contents_shinychat`.
-WeatherToolResult <- new_class("WeatherToolResult", parent = ContentToolResult)
+WeatherToolResult <- S7::new_class(
+  "WeatherToolResult",
+  parent = ellmer::ContentToolResult
+)
 
-method(contents_shinychat, WeatherToolResult) <- function(content, ...) {
+contents_shinychat <- S7::new_external_generic(
+  "shinychat",
+  "contents_shinychat",
+  "content"
+)
+
+S7::method(contents_shinychat, WeatherToolResult) <- function(content, ...) {
   card_weather(content@value, location_name = content@call_args$name)
 }
 

@@ -351,9 +351,17 @@ Chat <- R6::R6Class(
     #'   that yields strings. While iterating, the generator will block while
     #'   waiting for more content from the chatbot.
     #' @param ... The input to send to the chatbot. Can be strings or images.
-    stream = function(...) {
+    #' @param yield_all When `TRUE`, generated content types that are added to
+    #'   the turns but aren't strictly part of the LLM response are also
+    #'   yielded from the generator.
+    stream = function(..., yield_all = FALSE) {
       turn <- user_turn(...)
-      private$chat_impl(turn, stream = TRUE, echo = "none")
+      private$chat_impl(
+        turn,
+        yield_all = yield_all,
+        stream = TRUE,
+        echo = "none"
+      )
     },
 
     #' @description Submit input to the chatbot, returning asynchronously
@@ -361,9 +369,17 @@ Chat <- R6::R6Class(
     #'   generator](https://coro.r-lib.org/reference/async_generator.html) that
     #'   yields string promises.
     #' @param ... The input to send to the chatbot. Can be strings or images.
-    stream_async = function(...) {
+    #' @param yield_all When `TRUE`, generated content types that are added to
+    #'   the turns but aren't strictly part of the LLM response are also
+    #'   yielded from the generator.
+    stream_async = function(..., yield_all = FALSE) {
       turn <- user_turn(...)
-      private$chat_impl_async(turn, stream = TRUE, echo = "none")
+      private$chat_impl_async(
+        turn,
+        yield_all = yield_all,
+        stream = TRUE,
+        echo = "none"
+      )
     },
 
     #' @description Register a tool (an R function) that the chatbot can use.
@@ -445,19 +461,23 @@ Chat <- R6::R6Class(
       private,
       user_turn,
       stream,
-      echo
+      echo,
+      yield_all = FALSE
     ) {
       while (!is.null(user_turn)) {
         for (chunk in private$submit_turns(
           user_turn,
           stream = stream,
-          echo = echo
+          echo = echo,
+          yield_all = yield_all
         )) {
           yield(chunk)
         }
         user_turn <- private$invoke_tools()
-        if (!is.null(user_turn)) {
-          yield(user_turn)
+        if (yield_all && !is.null(user_turn)) {
+          for (content in user_turn@contents) {
+            yield(content)
+          }
           yield("\n\n")
         }
       }
@@ -470,19 +490,23 @@ Chat <- R6::R6Class(
       private,
       user_turn,
       stream,
-      echo
+      echo,
+      yield_all = FALSE
     ) {
       while (!is.null(user_turn)) {
         for (chunk in await_each(private$submit_turns_async(
           user_turn,
           stream = stream,
-          echo = echo
+          echo = echo,
+          yield_all = yield_all
         ))) {
           yield(chunk)
         }
         user_turn <- await(private$invoke_tools_async())
-        if (!is.null(user_turn)) {
-          yield(user_turn)
+        if (yield_all && !is.null(user_turn)) {
+          for (content in user_turn@contents) {
+            yield(content)
+          }
           yield("\n\n")
         }
         if (echo == "all") {
@@ -499,7 +523,8 @@ Chat <- R6::R6Class(
       user_turn,
       stream,
       echo,
-      type = NULL
+      type = NULL,
+      yield_all = FALSE
     ) {
       if (echo == "all") {
         cat_line(format(user_turn), prefix = "> ")
@@ -558,12 +583,15 @@ Chat <- R6::R6Class(
         }
       }
 
-      # TODO: When `include_tools` or similar arg is TRUE
-      for (content in turn@contents) {
-        if (!S7_inherits(content, ContentText)) {
-          yield(content)
-          yield("\n\n")
+      if (isTRUE(yield_all)) {
+        had_extra <- FALSE
+        for (content in turn@contents) {
+          if (!S7_inherits(content, ContentText)) {
+            had_extra <- TRUE
+            yield(content)
+          }
         }
+        if (had_extra) yield("\n\n")
       }
 
       self$add_turn(user_turn, turn)
@@ -579,7 +607,8 @@ Chat <- R6::R6Class(
       user_turn,
       stream,
       echo,
-      type = NULL
+      type = NULL,
+      yield_all = FALSE
     ) {
       response <- chat_perform(
         provider = private$provider,
@@ -622,12 +651,15 @@ Chat <- R6::R6Class(
         }
       }
 
-      # TODO: When `include_tools` or similar arg is TRUE
-      for (content in turn@contents) {
-        if (!S7_inherits(content, ContentText)) {
-          yield(content)
-          yield("\n\n")
+      if (isTRUE(yield_all)) {
+        had_extra <- FALSE
+        for (content in turn@contents) {
+          if (!S7_inherits(content, ContentText)) {
+            had_extra <- TRUE
+            yield(content)
+          }
         }
+        if (had_extra) yield("\n\n")
       }
 
       self$add_turn(user_turn, turn)
