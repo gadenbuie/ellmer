@@ -3,10 +3,6 @@
 Authentication
 
 
-To authenticate, we recommend saving your
-API key to
-the GOOGLE_API_KEY env var in your .Renviron
-(which you can easily edit by calling usethis::edit_r_environ()).
 By default, chat_gemini() will use Google's default application credentials
 if there is no API key provided. This requires the gargle package.
 It can also pick up on viewer-based credentials on Posit Connect. This in
@@ -16,10 +12,6 @@ turn requires the connectcreds package.
 Authentication
 
 
-To authenticate, we recommend saving your
-API key to
-the GOOGLE_API_KEY env var in your .Renviron
-(which you can easily edit by calling usethis::edit_r_environ()).
 By default, chat_gemini() will use Google's default application credentials
 if there is no API key provided. This requires the gargle package.
 It can also pick up on viewer-based credentials on Posit Connect. This in
@@ -71,10 +63,6 @@ turn requires the connectcreds package.
 <h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a></h3>
 
 
-<p>To authenticate, we recommend saving your
-<a href="https://aistudio.google.com/app/apikey" class="external-link">API key</a> to
-the <code>GOOGLE_API_KEY</code> env var in your <code>.Renviron</code>
-(which you can easily edit by calling <code>usethis::edit_r_environ()</code>).</p>
 <p>By default, <code>chat_gemini()</code> will use Google's default application credentials
 if there is no API key provided. This requires the <span class="pkg">gargle</span> package.</p>
 <p>It can also pick up on viewer-based credentials on Posit Connect. This in
@@ -116,9 +104,10 @@ scratch.</p></dd>
 
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>The API key to use for authentication. You generally should
-not supply this directly, but instead set the <code>GOOGLE_API_KEY</code> environment
-variable. Or leave it as <code>NULL</code> to use ambient credentials.</p></dd>
+<dd><p>API key to use for authentication.</p>
+<p>You generally should not supply this directly, but instead set the <code>GOOGLE_API_KEY</code> environment variable.
+The best place to set this is in <code>.Renviron</code>,
+which you can easily edit by calling <code>usethis::edit_r_environ()</code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>

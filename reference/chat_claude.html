@@ -3,29 +3,11 @@
 models under the Claude moniker.
 Note that a Claude Pro membership does not give you the ability to call
 models via the API; instead, you will need to sign up (and pay for) a
-developer account
-Authentication
-
-
-To authenticate, we recommend saving your
-API key to
-the ANTHROPIC_API_KEY env var in your .Renviron
-(which you can easily edit by calling usethis::edit_r_environ()).
-
-"><meta property="og:description" content="Anthropic provides a number of chat based
+developer account."><meta property="og:description" content="Anthropic provides a number of chat based
 models under the Claude moniker.
 Note that a Claude Pro membership does not give you the ability to call
 models via the API; instead, you will need to sign up (and pay for) a
-developer account
-Authentication
-
-
-To authenticate, we recommend saving your
-API key to
-the ANTHROPIC_API_KEY env var in your .Renviron
-(which you can easily edit by calling usethis::edit_r_environ()).
-
-"><meta property="og:image" content="https://ellmer.tidyverse.org/logo.png"><script defer data-domain="ellmer.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+developer account."><meta property="og:image" content="https://ellmer.tidyverse.org/logo.png"><script defer data-domain="ellmer.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -71,16 +53,7 @@ the ANTHROPIC_API_KEY env var in your .Renviron
 models under the <a href="https://www.anthropic.com/claude" class="external-link">Claude</a> moniker.
 Note that a Claude Pro membership does not give you the ability to call
 models via the API; instead, you will need to sign up (and pay for) a
-<a href="https://console.anthropic.com/" class="external-link">developer account</a></p><div class="section">
-<h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a></h3>
-
-
-<p>To authenticate, we recommend saving your
-<a href="https://console.anthropic.com/account/keys" class="external-link">API key</a> to
-the <code>ANTHROPIC_API_KEY</code> env var in your <code>.Renviron</code>
-(which you can easily edit by calling <code>usethis::edit_r_environ()</code>).</p>
-</div>
-
+<a href="https://console.anthropic.com/" class="external-link">developer account</a>.</p>
     </div>
 
     <div class="section level2">
@@ -143,9 +116,10 @@ claude features that are still in beta.</p></dd>
 
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>The API key to use for authentication. You generally should
-not supply this directly, but instead set the <code>ANTHROPIC_API_KEY</code> environment
-variable.</p></dd>
+<dd><p>API key to use for authentication.</p>
+<p>You generally should not supply this directly, but instead set the <code>ANTHROPIC_API_KEY</code> environment variable.
+The best place to set this is in <code>.Renviron</code>,
+which you can easily edit by calling <code>usethis::edit_r_environ()</code>.</p></dd>
 
 
 <dt id="arg-echo">echo<a class="anchor" aria-label="anchor" href="#arg-echo"></a></dt>
