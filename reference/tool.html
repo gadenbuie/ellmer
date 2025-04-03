@@ -52,7 +52,7 @@ run in the current R instance.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tool</span><span class="op">(</span><span class="va">.fun</span>, <span class="va">.description</span>, <span class="va">...</span>, .name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tool</span><span class="op">(</span><span class="va">.fun</span>, <span class="va">.description</span>, <span class="va">...</span>, .name <span class="op">=</span> <span class="cn">NULL</span>, .annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,6 +76,12 @@ function.</p></dd>
 
 <dt id="arg--name">.name<a class="anchor" aria-label="anchor" href="#arg--name"></a></dt>
 <dd><p>The name of the function.</p></dd>
+
+
+<dt id="arg--annotations">.annotations<a class="anchor" aria-label="anchor" href="#arg--annotations"></a></dt>
+<dd><p>Additional properties that describe the tool and its
+behavior. Usually created by <code><a href="tool_annotations.html">tool_annotations()</a></code>, where you can find a
+description of the annotation properties recommended by the <a href="https://modelcontextprotocol.io/introduction" class="external-link">Model Context Protocol</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
