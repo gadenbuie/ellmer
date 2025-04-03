@@ -16,15 +16,14 @@
 <url><loc>https://ellmer.tidyverse.org/reference/Provider.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/Turn.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/Type.html</loc></url>
-<url><loc>https://ellmer.tidyverse.org/reference/chat_azure.html</loc></url>
-<url><loc>https://ellmer.tidyverse.org/reference/chat_bedrock.html</loc></url>
-<url><loc>https://ellmer.tidyverse.org/reference/chat_claude.html</loc></url>
-<url><loc>https://ellmer.tidyverse.org/reference/chat_cortex.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/reference/chat_anthropic.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/reference/chat_aws_bedrock.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/reference/chat_azure_openai.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_cortex_analyst.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_databricks.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_deepseek.html</loc></url>
-<url><loc>https://ellmer.tidyverse.org/reference/chat_gemini.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_github.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/reference/chat_google_gemini.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_groq.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_ollama.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/chat_openai.html</loc></url>
@@ -36,6 +35,7 @@
 <url><loc>https://ellmer.tidyverse.org/reference/content_pdf_file.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/contents_text.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/create_tool_def.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/reference/deprecated.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/ellmer-package.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/gemini_upload.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/reference/has_credentials.html</loc></url>

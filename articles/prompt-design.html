@@ -156,20 +156,20 @@ easier for you to grok what’s going on.</p>
 <span><span class="st">  How can I compute the mean and median of variables a, b, c, and so on,</span></span>
 <span><span class="st">  all the way up to z, grouped by age and sex.</span></span>
 <span><span class="st">"</span></span></code></pre></div>
-<p>I’ll use <code><a href="../reference/chat_claude.html">chat_claude()</a></code> for this problem because in our
-experience it does the best job of generating code.</p>
+<p>I’ll use <code><a href="../reference/chat_anthropic.html">chat_anthropic()</a></code> for this problem because in
+our experience it does the best job of generating code.</p>
 <div class="section level3">
 <h3 id="basic-flavour">Basic flavour<a class="anchor" aria-label="anchor" href="#basic-flavour"></a>
 </h3>
 <p>When I don’t provide a system prompt, I sometimes get answers in
 different languages or different styles of R code:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="va">question</span><span class="op">)</span></span></code></pre></div>
 <p>I can ensure that I always get R code in a specific style by
 providing a system prompt:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer who prefers the tidyverse.</span></span>
 <span><span class="st">"</span><span class="op">)</span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="va">question</span><span class="op">)</span></span></code></pre></div>
@@ -181,7 +181,7 @@ framing of the response from the specific questions you ask.</p>
 <p>Since I’m mostly interested in the code, I ask it to drop the
 explanation and sample data:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer who prefers the tidyverse.</span></span>
 <span><span class="st">  Just give me the code. I don't want any explanation or sample data.</span></span>
 <span><span class="st">"</span><span class="op">)</span></span>
@@ -189,13 +189,13 @@ explanation and sample data:</p>
 <p>And of course, if you want a different style of R code, just ask for
 it:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer who prefers data.table.</span></span>
 <span><span class="st">  Just give me the code. I don't want any explanation or sample data.</span></span>
 <span><span class="st">"</span><span class="op">)</span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="va">question</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer who prefers base R.</span></span>
 <span><span class="st">  Just give me the code. I don't want any explanation or sample data.</span></span>
 <span><span class="st">"</span><span class="op">)</span></span>
@@ -208,7 +208,7 @@ it:</p>
 more explicit. For example, the code isn’t styled quite how I’d like it,
 so I provide more details about what I do want:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer who prefers the tidyverse.</span></span>
 <span><span class="st">  Just give me the code. I don't want any explanation or sample data.</span></span>
 <span><span class="st"></span></span>
@@ -225,7 +225,7 @@ pretty close.</p>
 <p>You could provide a different prompt if you were looking for more
 explanation of the code:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R teacher.</span></span>
 <span><span class="st">  I am a new R user who wants to improve my programming skills.</span></span>
 <span><span class="st">  Help me understand the code you produce by explaining each function call with</span></span>
@@ -244,7 +244,7 @@ features aren’t in their index, or the older features are so much more
 popular). So if you want your code to use specific newer language
 features, you might need to provide the examples yourself:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_claude.html">chat_claude</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_anthropic.html">chat_anthropic</a></span><span class="op">(</span>system_prompt <span class="op">=</span> <span class="st">"</span></span>
 <span><span class="st">  You are an expert R programmer.</span></span>
 <span><span class="st">  Just give me the code; no explanation in text.</span></span>
 <span><span class="st">  Use the `.by` argument rather than `group_by()`.</span></span>
