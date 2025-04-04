@@ -41,7 +41,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ellmer-development-version">ellmer (development version)<a class="anchor" aria-label="anchor" href="#ellmer-development-version"></a></h2>
-<ul><li><p><code>chat_</code> functions no longer take a turns object, instead use <code>set_turns()</code> (<a href="https://github.com/tidyverse/ellmer/issues/427" class="external-link">#427</a>).</p></li>
+<ul><li><p><code><a href="../reference/deprecated.html">chat_gemini()</a></code> can now handle responses that include citation metadata (<a href="https://github.com/tidyverse/ellmer/issues/358" class="external-link">#358</a>).</p></li>
+<li><p><code>chat_</code> functions no longer take a turns object, instead use <code>set_turns()</code> (<a href="https://github.com/tidyverse/ellmer/issues/427" class="external-link">#427</a>).</p></li>
 <li><p><code>echo = "output"</code> replaces the now-deprecated <code>echo = "text"</code> option in <code>Chat$chat()</code>. When using <code>echo = "output"</code>, additional output, such as tool requests and results, are shown as they occur. When <code>echo = "none"</code>, tool call failures are emitted as warnings (<a href="https://github.com/tidyverse/ellmer/issues/366" class="external-link">#366</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>).</p></li>
 <li>
 <p><code>ContentToolResult</code> objects can now be returned directly from the <code><a href="../reference/tool.html">tool()</a></code> function and now includes additional information (<a href="https://github.com/tidyverse/ellmer/issues/398" class="external-link">#398</a> <a href="https://github.com/tidyverse/ellmer/issues/399" class="external-link">#399</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>):</p>
