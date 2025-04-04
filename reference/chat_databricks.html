@@ -127,11 +127,10 @@ currently not supported by ellmer.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chat_databricks</span><span class="op">(</span></span>
 <span>  workspace <span class="op">=</span> <span class="fu">databricks_workspace</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  system_prompt <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  turns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  api_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  echo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"text"</span>, <span class="st">"all"</span><span class="op">)</span></span>
+<span>  echo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"output"</span>, <span class="st">"all"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -147,12 +146,6 @@ environment variable <code>DATABRICKS_HOST</code>, if set.</p></dd>
 
 <dt id="arg-system-prompt">system_prompt<a class="anchor" aria-label="anchor" href="#arg-system-prompt"></a></dt>
 <dd><p>A system prompt to set the behavior of the assistant.</p></dd>
-
-
-<dt id="arg-turns">turns<a class="anchor" aria-label="anchor" href="#arg-turns"></a></dt>
-<dd><p>A list of <a href="Turn.html">Turn</a>s to start the chat with (i.e., continuing a
-previous conversation). If not provided, the conversation begins from
-scratch.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>

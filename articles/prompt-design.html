@@ -349,7 +349,7 @@ provide the input and output examples in such a loose format.</p>
 <span><span class="st">  {"name": "ground cinnamon", "quantity": 2, "unit": "teaspoon"}</span></span>
 <span><span class="st">)"</span></span>
 <span></span>
-<span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_openai.html">chat_openai</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">instruct_json</span>, <span class="va">instruct_weight</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_openai.html">chat_openai</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">instruct_json</span>, <span class="va">instruct_weight</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="va">ingredients</span><span class="op">)</span></span></code></pre></div>
 <p>Just providing the examples seems to work remarkably well. But I
 found it useful to also include a description of what the examples are

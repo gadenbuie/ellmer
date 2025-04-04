@@ -84,7 +84,6 @@ org uses AWS SSO, you'll need to run <code>aws sso login</code> at the terminal.
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chat_aws_bedrock</span><span class="op">(</span></span>
 <span>  system_prompt <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  turns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  profile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  api_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -98,12 +97,6 @@ org uses AWS SSO, you'll need to run <code>aws sso login</code> at the terminal.
 
 <dl><dt id="arg-system-prompt">system_prompt<a class="anchor" aria-label="anchor" href="#arg-system-prompt"></a></dt>
 <dd><p>A system prompt to set the behavior of the assistant.</p></dd>
-
-
-<dt id="arg-turns">turns<a class="anchor" aria-label="anchor" href="#arg-turns"></a></dt>
-<dd><p>A list of <a href="Turn.html">Turn</a>s to start the chat with (i.e., continuing a
-previous conversation). If not provided, the conversation begins from
-scratch.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>

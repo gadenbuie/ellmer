@@ -60,7 +60,10 @@ run in the current R instance.</p>
 
 
 <dl><dt id="arg--fun">.fun<a class="anchor" aria-label="anchor" href="#arg--fun"></a></dt>
-<dd><p>The function to be invoked when the tool is called.</p></dd>
+<dd><p>The function to be invoked when the tool is called. The return
+value of the function is sent back to the chatbot.</p>
+<p>Expert users can customize the tool result by returning a
+<a href="Content.html">ContentToolResult</a> object.</p></dd>
 
 
 <dt id="arg--description">.description<a class="anchor" aria-label="anchor" href="#arg--description"></a></dt>
