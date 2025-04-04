@@ -41,7 +41,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ellmer-development-version">ellmer (development version)<a class="anchor" aria-label="anchor" href="#ellmer-development-version"></a></h2>
-<ul><li><p><code>ContentToolResult</code> objects now include the error condition in the <code>error</code> property when a tool call fails (<a href="https://github.com/tidyverse/ellmer/issues/421" class="external-link">#421</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>).</p></li>
+<ul><li><p>ellmer now tracks the cost of input and output tokens. The cost is displayed when you print a <code>Chat</code> object, in <code>tokens_usage()</code>, and with <code>Chat$get_cost()</code>. This is our best effort at computing the cost, but you should treat it as an estimate rather than the exact price. Unfortunately LLM APIs currently make it very hard to figure out exactly how much your queries are costing (<a href="https://github.com/tidyverse/ellmer/issues/203" class="external-link">#203</a>).</p></li>
+<li><p><code>ContentToolResult</code> objects now include the error condition in the <code>error</code> property when a tool call fails (<a href="https://github.com/tidyverse/ellmer/issues/421" class="external-link">#421</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>).</p></li>
 <li>
 <p>Several chat functions were renamed to better align with the companies providing the API (<a href="https://github.com/tidyverse/ellmer/issues/382" class="external-link">#382</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>):</p>
 <ul><li>
