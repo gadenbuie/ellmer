@@ -18,12 +18,14 @@
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_anthropic.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_aws_bedrock.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_azure_openai.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/dev/reference/chat_cloudflare.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_cortex_analyst.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_databricks.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_deepseek.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_github.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_google_gemini.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_groq.html</loc></url>
+<url><loc>https://ellmer.tidyverse.org/dev/reference/chat_huggingface.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_mistral.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_ollama.html</loc></url>
 <url><loc>https://ellmer.tidyverse.org/dev/reference/chat_openai.html</loc></url>
