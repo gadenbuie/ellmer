@@ -1,12 +1,39 @@
 #' @include turns.R
 NULL
 
+maybe_invoke_callbacks_tool_request <- function(callbacks, request) {
+  cb <- callbacks$tool_request
+  if (is.null(cb)) return()
+
+  tryCatch(
+    {
+      cb$invoke(request)
+      NULL
+    },
+    ellmer_tool_reject = function(e) {
+      ContentToolResult(error = e$message, request = request)
+    }
+  )
+}
+
+maybe_invoke_callbacks_tool_result <- function(callbacks, result) {
+  cb <- callbacks$tool_result
+  if (is.null(cb)) return()
+  cb$invoke(result)
+}
+
 # Results a content list
-invoke_tools <- function(turn, echo = "none") {
+invoke_tools <- function(turn, echo = "none", callbacks = list()) {
   tool_requests <- extract_tool_requests(turn@contents)
 
   lapply(tool_requests, function(request) {
     maybe_echo_tool(request, echo = echo)
+    rejected <- maybe_invoke_callbacks_tool_request(callbacks, request)
+    if (!is.null(rejected)) {
+      maybe_echo_tool(rejected, echo = echo)
+      return(rejected)
+    }
+
     result <- invoke_tool(request)
 
     if (promises::is.promise(result@value)) {
@@ -17,18 +44,29 @@ invoke_tools <- function(turn, echo = "none") {
     }
 
     maybe_echo_tool(result, echo = echo)
+    maybe_invoke_callbacks_tool_result(callbacks, result)
     result
   })
 }
 
 on_load(
-  invoke_tools_async <- coro::async(function(turn, tools, echo = "none") {
+  invoke_tools_async <- coro::async(function(
+    turn,
+    tools,
+    echo = "none",
+    callbacks = list()
+  ) {
     tool_requests <- extract_tool_requests(turn@contents)
 
     # We call it this way instead of a more natural for + await_each() because
     # we want to run all the async tool calls in parallel
     result_promises <- lapply(tool_requests, function(request) {
       maybe_echo_tool(request, echo = echo)
+      rejected <- maybe_invoke_callbacks_tool_request(callbacks, request)
+      if (!is.null(rejected)) {
+        maybe_echo_tool(rejected, echo = echo)
+        return(rejected)
+      }
 
       invoke_tool_async(request)
     })
@@ -36,6 +74,8 @@ on_load(
     result_promises <- lapply(result_promises, function(p) {
       p$then(function(result) {
         maybe_echo_tool(result, echo = echo)
+        maybe_invoke_callbacks_tool_result(callbacks, result)
+        result
       })
     })
 
