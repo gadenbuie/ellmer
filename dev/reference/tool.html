@@ -91,6 +91,11 @@ description of the annotation properties recommended by the <a href="https://mod
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An S7 <code>ToolDef</code> object.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other tool calling helpers:
+<code><a href="tool_annotations.html">tool_annotations</a>()</code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -103,7 +108,12 @@ description of the annotation properties recommended by the <a href="https://mod
 <span class="r-in"><span>  <span class="st">"Drawn numbers from a random normal distribution"</span>,</span></span>
 <span class="r-in"><span>  n <span class="op">=</span> <span class="fu"><a href="type_boolean.html">type_integer</a></span><span class="op">(</span><span class="st">"The number of observations. Must be a positive integer."</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  mean <span class="op">=</span> <span class="fu"><a href="type_boolean.html">type_number</a></span><span class="op">(</span><span class="st">"The mean value of the distribution."</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  sd <span class="op">=</span> <span class="fu"><a href="type_boolean.html">type_number</a></span><span class="op">(</span><span class="st">"The standard deviation of the distribution. Must be a non-negative number."</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  sd <span class="op">=</span> <span class="fu"><a href="type_boolean.html">type_number</a></span><span class="op">(</span><span class="st">"The standard deviation of the distribution. Must be a non-negative number."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  .annotations <span class="op">=</span> <span class="fu"><a href="tool_annotations.html">tool_annotations</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Draw Random Normal Numbers"</span>,</span></span>
+<span class="r-in"><span>    read_only_hint <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    open_world_hint <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="chat_openai.html">chat_openai</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Then register it</span></span></span>
