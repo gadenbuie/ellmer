@@ -3,11 +3,12 @@ pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   ellmer: ellmer.html
+  programming: programming.html
   prompt-design: prompt-design.html
   streaming-async: streaming-async.html
   structured-data: structured-data.html
   tool-calling: tool-calling.html
-last_built: 2025-05-08T18:29Z
+last_built: 2025-05-09T12:20Z
 urls:
   reference: https://ellmer.tidyverse.org/reference
   article: https://ellmer.tidyverse.org/articles

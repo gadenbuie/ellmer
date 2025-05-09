@@ -23,7 +23,8 @@ Learn more in vignette("tool-calling").'><meta property="og:image" content="http
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/prompt-design.html">Prompt design</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/programming.html">Programming with ellmer</a></li>
+    <li><a class="dropdown-item" href="../articles/prompt-design.html">Prompt design</a></li>
     <li><a class="dropdown-item" href="../articles/streaming-async.html">Streaming and async APIs</a></li>
     <li><a class="dropdown-item" href="../articles/structured-data.html">Structured data</a></li>
     <li><a class="dropdown-item" href="../articles/tool-calling.html">Tool/function calling</a></li>
@@ -52,7 +53,14 @@ run in the current R instance.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tool</span><span class="op">(</span><span class="va">.fun</span>, <span class="va">.description</span>, <span class="va">...</span>, .name <span class="op">=</span> <span class="cn">NULL</span>, .annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tool</span><span class="op">(</span></span>
+<span>  <span class="va">.fun</span>,</span>
+<span>  <span class="va">.description</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .convert <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -79,6 +87,11 @@ function.</p></dd>
 
 <dt id="arg--name">.name<a class="anchor" aria-label="anchor" href="#arg--name"></a></dt>
 <dd><p>The name of the function.</p></dd>
+
+
+<dt id="arg--convert">.convert<a class="anchor" aria-label="anchor" href="#arg--convert"></a></dt>
+<dd><p>Should JSON inputs be automatically convert to their
+R data type equivalents? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--annotations">.annotations<a class="anchor" aria-label="anchor" href="#arg--annotations"></a></dt>
