@@ -367,13 +367,21 @@ all providers).</p></dd>
 resolves with the response all at once. Returns a promise that resolves
 to a string (probably Markdown).</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">chat_async</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">chat_async</span><span class="op">(</span><span class="va">...</span>, tool_mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"concurrent"</span>, <span class="st">"sequential"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images.</p></dd>
+
+
+<dt><code>tool_mode</code></dt>
+<dd><p>Whether tools should be invoked one-at-a-time
+(<code>"sequential"</code>) or concurrently (<code>"concurrent"</code>). Sequential mode is
+best for interactive applications, especially when a tool may involve
+an interactive user interface. Concurrent mode is the default and is
+best suited for automated scripts or non-interactive applications.</p></dd>
 
 
 </dl><p></p></div>
@@ -404,13 +412,21 @@ waiting for more content from the chatbot.</p><div class="section">
 streaming results. Returns a <a href="https://coro.r-lib.org/reference/async_generator.html" class="external-link">coro async generator</a> that
 yields string promises.</p><div class="section">
 <h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">stream_async</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Chat</span><span class="op">$</span><span class="fu">stream_async</span><span class="op">(</span><span class="va">...</span>, tool_mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"concurrent"</span>, <span class="st">"sequential"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>The input to send to the chatbot. Can be strings or images.</p></dd>
+
+
+<dt><code>tool_mode</code></dt>
+<dd><p>Whether tools should be invoked one-at-a-time
+(<code>"sequential"</code>) or concurrently (<code>"concurrent"</code>). Sequential mode is
+best for interactive applications, especially when a tool may involve
+an interactive user interface. Concurrent mode is the default and is
+best suited for automated scripts or non-interactive applications.</p></dd>
 
 
 </dl><p></p></div>
