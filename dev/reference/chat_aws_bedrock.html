@@ -89,7 +89,9 @@ org uses AWS SSO, you'll need to run <code>aws sso login</code> at the terminal.
 <span>  profile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  api_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  echo <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">models_aws_bedrock</span><span class="op">(</span>profile <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -101,9 +103,13 @@ org uses AWS SSO, you'll need to run <code>aws sso login</code> at the terminal.
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>ellmer provides a default model, but you'll typically need to
-you'll specify a model that you actually have access to.</p>
-<p>If you're using <a href="https://aws.amazon.com/blogs/machine-learning/getting-started-with-cross-region-inference-in-amazon-bedrock/" class="external-link">cross-region inference</a>,
+<dd><p>The model to use for the chat (defaults to "anthropic.claude-3-5-sonnet-20240620-v1:0").
+We regularly update the default, so we strongly recommend explicitly specifying a model for anything other than casual use.
+Use <code>models_models_aws_bedrock()</code> to see all options.
+.</p>
+<p>While ellmer provides a default model, there's no guarantee that you'll
+have access to it, so you'll need to specify a model that you can.
+If you're using <a href="https://aws.amazon.com/blogs/machine-learning/getting-started-with-cross-region-inference-in-amazon-bedrock/" class="external-link">cross-region inference</a>,
 you'll need to use the inference profile ID, e.g.
 <code>model="us.anthropic.claude-3-5-sonnet-20240620-v1:0"</code>.</p></dd>
 

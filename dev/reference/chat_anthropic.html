@@ -69,6 +69,11 @@ models via the API; instead, you will need to sign up (and pay for) a
 <span>  beta_headers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="fu">anthropic_key</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  echo <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">models_anthropic</span><span class="op">(</span></span>
+<span>  base_url <span class="op">=</span> <span class="st">"https://api.anthropic.com/v1"</span>,</span>
+<span>  api_key <span class="op">=</span> <span class="fu">anthropic_key</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -89,9 +94,9 @@ models via the API; instead, you will need to sign up (and pay for) a
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>The model to use for the chat. The default, <code>NULL</code>, will pick
-a reasonable default, and tell you about. We strongly recommend explicitly
-choosing a model for all but the most casual use.</p></dd>
+<dd><p>The model to use for the chat (defaults to "claude-3-7-sonnet-latest").
+We regularly update the default, so we strongly recommend explicitly specifying a model for anything other than casual use.
+Use <code>models_anthropic()</code> to see all options.</p></dd>
 
 
 <dt id="arg-api-args">api_args<a class="anchor" aria-label="anchor" href="#arg-api-args"></a></dt>

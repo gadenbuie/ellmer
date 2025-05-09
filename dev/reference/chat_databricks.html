@@ -150,10 +150,9 @@ environment variable <code>DATABRICKS_HOST</code>, if set.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>The model to use for the chat. The default, <code>NULL</code>, will pick a
-reasonable default, and tell you about. We strongly recommend explicitly
-choosing a model for all but the most casual use. Available foundational
-models include:</p><ul><li><p><code>databricks-dbrx-instruct</code> (the default)</p></li>
+<dd><p>The model to use for the chat (defaults to "databricks-dbrx-instruct").
+We regularly update the default, so we strongly recommend explicitly specifying a model for anything other than casual use.</p>
+<p>Available foundational models include:</p><ul><li><p><code>databricks-dbrx-instruct</code> (the default)</p></li>
 <li><p><code>databricks-mixtral-8x7b-instruct</code></p></li>
 <li><p><code>databricks-meta-llama-3-1-70b-instruct</code></p></li>
 <li><p><code>databricks-meta-llama-3-1-405b-instruct</code></p></li>
