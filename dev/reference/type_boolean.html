@@ -145,9 +145,14 @@ provide here, the better.</p></dd>
 
 
 <dt id="arg-required-required">required, .required<a class="anchor" aria-label="anchor" href="#arg-required-required"></a></dt>
-<dd><p>Is the component required? If <code>FALSE</code>, and the
-component does not exist in the data, the LLM may hallucinate a value.
-Only applies when the element is nested inside of a <code>type_object()</code>.</p></dd>
+<dd><p>Is the component or argument required?</p>
+<p>In type descriptions for structured data, if <code>required = FALSE</code> and the
+component does not exist in the data, the LLM may hallucinate a value. Only
+applies when the element is nested inside of a <code>type_object()</code>.</p>
+<p>In tool definitions, <code>required = TRUE</code> signals that the LLM should always
+provide a value. Arguments with <code>required = FALSE</code> should have a default
+value in the tool function's definition. If the LLM does not provide a
+value, the default value will be used.</p></dd>
 
 
 <dt id="arg-values">values<a class="anchor" aria-label="anchor" href="#arg-values"></a></dt>
