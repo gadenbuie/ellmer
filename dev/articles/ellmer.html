@@ -142,9 +142,9 @@ languages will typically require more tokens, because (in brief) LLMs
 are trained on data from the internet, which is primarily in
 English.</p>
 <p>LLMs are priced per million tokens. State of the art models (like
-GPT-4o or Claude 3.5 sonnet) cost $2-3 per million input tokens, and
+GPT-4.1 or Claude 3.5 sonnet) cost $2-3 per million input tokens, and
 $10-15 per million output tokens. Cheaper models can cost much less,
-e.g. GPT-4o mini costs $0.15 per million input tokens and $0.60 per
+e.g. GPT-4.1 nanoo costs $0.10 per million input tokens and $0.40 per
 million output tokens. Even $10 of API credit will give you a lot of
 room for experimentation, particularly with cheaper models, and prices
 are likely to decline as model performance improves.</p>
@@ -157,7 +157,7 @@ cost grow rapidly with the number of conversational turns.</p>
 printing it, and you can see total usage for a session with
 <code><a href="../reference/token_usage.html">token_usage()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_openai.html">chat_openai</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">"gpt-4o"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chat_openai.html">chat_openai</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">"gpt-4.1"</span><span class="op">)</span></span>
 <span><span class="va">.</span> <span class="op">&lt;-</span> <span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="st">"Who created R?"</span>, echo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">chat</span></span>
 <span></span>
@@ -257,7 +257,7 @@ prompt stuffed with useful knowledge. For example:</p>
 <li><p>Help people use your new package. To do so, you need a custom
 prompt because LLMs were trained on data prior to your package’s
 existence. You can create a surprisingly useful tool just by preloading
-the prompt with your README and vignettes. This is how the <a href="https://github.com/jcheng5/elmer-assistant" class="external-link">ellmer assistant</a>
+the prompt with your README and vignettes. This is how the <a href="https://github.com/jcheng5/ellmer-assistant" class="external-link">ellmer assistant</a>
 works.</p></li>
 <li><p>Build language specific prompts for R and/or python. <a href="https://shiny.posit.co/blog/posts/shiny-assistant/" class="external-link">Shiny
 assistant</a> helps you build shiny apps (either in R or python) by
@@ -377,7 +377,7 @@ plots to match your corporate style guide.</p></li>
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
+  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

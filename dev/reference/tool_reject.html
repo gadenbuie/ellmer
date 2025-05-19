@@ -27,18 +27,18 @@ chat$register_tool(tool(
 ))
 
 chat$chat(&quot;What files are available in my current directory?&quot;)
-#&amp;gt; ◯ [tool call] list_files()
+#&amp;gt; [tool call] list_files()
 #&amp;gt; Would you like to allow access to your current directory? (Yes/no/cancel) no
-#&amp;gt; ■ #&amp;gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.
+#&amp;gt; #&amp;gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.
 #&amp;gt; It seems I am unable to access the files in your current directory right now.
 #&amp;gt; If you can tell me what specific files you're looking for or if you can #' provide
 #&amp;gt; the list, I can assist you further.
 
 chat$chat(&quot;Try again.&quot;)
-#&amp;gt; ◯ [tool call] list_files()
+#&amp;gt; [tool call] list_files()
 #&amp;gt; Would you like to allow access to your current directory? (Yes/no/cancel) yes
-#&amp;gt; ● #&amp;gt; app.R
-#&amp;gt;   #&amp;gt; data.csv
+#&amp;gt; #&amp;gt; app.R
+#&amp;gt; #&amp;gt; data.csv
 #&amp;gt; The files available in your current directory are &quot;app.R&quot; and &quot;data.csv&quot;.
 
 You can achieve a similar experience with tools written by others by using a
@@ -104,18 +104,18 @@ chat$register_tool(tool(
 ))
 
 chat$chat(&quot;What files are available in my current directory?&quot;)
-#&amp;gt; ◯ [tool call] list_files()
+#&amp;gt; [tool call] list_files()
 #&amp;gt; Would you like to allow access to your current directory? (Yes/no/cancel) no
-#&amp;gt; ■ #&amp;gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.
+#&amp;gt; #&amp;gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.
 #&amp;gt; It seems I am unable to access the files in your current directory right now.
 #&amp;gt; If you can tell me what specific files you're looking for or if you can #' provide
 #&amp;gt; the list, I can assist you further.
 
 chat$chat(&quot;Try again.&quot;)
-#&amp;gt; ◯ [tool call] list_files()
+#&amp;gt; [tool call] list_files()
 #&amp;gt; Would you like to allow access to your current directory? (Yes/no/cancel) yes
-#&amp;gt; ● #&amp;gt; app.R
-#&amp;gt;   #&amp;gt; data.csv
+#&amp;gt; #&amp;gt; app.R
+#&amp;gt; #&amp;gt; data.csv
 #&amp;gt; The files available in your current directory are &quot;app.R&quot; and &quot;data.csv&quot;.
 
 You can achieve a similar experience with tools written by others by using a
@@ -224,18 +224,18 @@ definition and know exactly how it will be called.</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="st">"What files are available in my current directory?"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ◯ [tool call] list_files()</span></span>
+<span><span class="co">#&gt; [tool call] list_files()</span></span>
 <span><span class="co">#&gt; Would you like to allow access to your current directory? (Yes/no/cancel) no</span></span>
-<span><span class="co">#&gt; ■ #&gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.</span></span>
+<span><span class="co">#&gt; #&gt; Error: Tool call rejected. The user has chosen to disallow the tool #' call.</span></span>
 <span><span class="co">#&gt; It seems I am unable to access the files in your current directory right now.</span></span>
 <span><span class="co">#&gt; If you can tell me what specific files you're looking for or if you can #' provide</span></span>
 <span><span class="co">#&gt; the list, I can assist you further.</span></span>
 <span></span>
 <span><span class="va">chat</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="st">"Try again."</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ◯ [tool call] list_files()</span></span>
+<span><span class="co">#&gt; [tool call] list_files()</span></span>
 <span><span class="co">#&gt; Would you like to allow access to your current directory? (Yes/no/cancel) yes</span></span>
-<span><span class="co">#&gt; ● #&gt; app.R</span></span>
-<span><span class="co">#&gt;   #&gt; data.csv</span></span>
+<span><span class="co">#&gt; #&gt; app.R</span></span>
+<span><span class="co">#&gt; #&gt; data.csv</span></span>
 <span><span class="co">#&gt; The files available in your current directory are "app.R" and "data.csv".</span></span></code></pre><p></p></div>
 <p>You can achieve a similar experience with tools written by others by using a
 <code>tool_request</code> callback. In the next example, imagine the tool is provided by
@@ -307,7 +307,7 @@ reason.</p>
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
+  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

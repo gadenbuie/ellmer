@@ -113,8 +113,8 @@
 <p>If you’re using ellmer inside an organisation, you may have internal policies that limit you to models from big cloud providers, e.g. <code><a href="reference/chat_azure_openai.html">chat_azure_openai()</a></code>, <code><a href="reference/chat_aws_bedrock.html">chat_aws_bedrock()</a></code>, <code><a href="reference/chat_databricks.html">chat_databricks()</a></code>, or <code><a href="reference/chat_snowflake.html">chat_snowflake()</a></code>.</p>
 <p>If you’re using ellmer for your own exploration, you’ll have a lot more freedom, so we have a few recommendations to help you get started:</p>
 <ul>
-<li><p><code><a href="reference/chat_openai.html">chat_openai()</a></code> or <code><a href="reference/chat_anthropic.html">chat_anthropic()</a></code> are good places to start. <code><a href="reference/chat_openai.html">chat_openai()</a></code> defaults to <strong>GPT-4o</strong>, but you can use <code>model = "gpt-4o-mini"</code> for a cheaper, lower-quality model, or <code>model = "o1-mini"</code> for more complex reasoning. <code><a href="reference/chat_anthropic.html">chat_anthropic()</a></code> is also good; it defaults to <strong>Claude 3.5 Sonnet</strong>, which we have found to be particularly good at writing code.</p></li>
-<li><p><code><a href="reference/chat_google_gemini.html">chat_google_gemini()</a></code> is great for large prompts because it has a much larger context window than other models. It allows up to 1 million tokens, compared to Claude 3.5 Sonnet’s 200k and GPT-4o’s 128k. It also comes with a generous free tier (with the downside that <a href="https://ai.google.dev/gemini-api/terms#unpaid-services" class="external-link">your data is used</a> to improve the model).</p></li>
+<li><p><code><a href="reference/chat_openai.html">chat_openai()</a></code> or <code><a href="reference/chat_anthropic.html">chat_anthropic()</a></code> are good places to start. <code><a href="reference/chat_openai.html">chat_openai()</a></code> defaults to <strong>GPT-4.1</strong>, but you can use <code>model = "gpt-4-1-nano"</code> for a cheaper, faster model, or <code>model = "o3"</code> for more complex reasoning. <code><a href="reference/chat_anthropic.html">chat_anthropic()</a></code> is also good; it defaults to <strong>Claude 3.7 Sonnet</strong>, which we have found to be particularly good at writing R code.</p></li>
+<li><p><code><a href="reference/chat_google_gemini.html">chat_google_gemini()</a></code> is a strong model with generous free tier (with the downside that <a href="https://ai.google.dev/gemini-api/terms#unpaid-services" class="external-link">your data is used</a> to improve the model), making it a great place to start if you don’t want to spend any money.</p></li>
 <li><p><code><a href="reference/chat_ollama.html">chat_ollama()</a></code>, which uses <a href="https://ollama.com" class="external-link">Ollama</a>, allows you to run models on your own computer. While the biggest models you can run locally aren’t as good as the state of the art hosted models, they don’t share your data and are effectively free.</p></li>
 </ul>
 </div>
@@ -245,6 +245,8 @@
 <li>Joe Cheng <br><small class="roles"> Author </small>   </li>
 <li>Aaron Jacobs <br><small class="roles"> Author </small>   </li>
 <li>
+<a href="https://garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7111-0077" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
 <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  <a href="https://ror.org/03wc8by49" class="external-link"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg" class="ror" alt="ROR"></a> </li>
 </ul>
 </div>
@@ -264,7 +266,7 @@
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
+  <p>Developed by <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, Joe Cheng, Aaron Jacobs, <a href="https://garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
